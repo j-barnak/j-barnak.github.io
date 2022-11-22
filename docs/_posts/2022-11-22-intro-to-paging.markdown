@@ -11,8 +11,3 @@ This initial post is a test
 {% highlight cpp %}
 std::cout << "hello world";
 {% endhighlight %}
-
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
