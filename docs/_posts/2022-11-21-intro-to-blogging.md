@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Introduction to Paging"
-date:   2022-12-22 10:01:30 PM EST
+title:  "Introduction to Blogging"
+date:   2022-12-21
 categories: operating-system
 ---
 Hi and welcome!
