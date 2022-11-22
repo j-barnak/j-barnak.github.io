@@ -1,1 +1,0 @@
-# j-barnak.github.io
