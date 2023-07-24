@@ -19,8 +19,8 @@
   -- (Read: http://dynalon.github.io/mdwiki/#!quickstart.md#Adding_a_navigation)
   -->
 
-[Test](./pages/Test/)
-[Test2](./pages/Test2/)
+[Test](pages/Test/)
+[Test2](pages/Test2/)
 
 <!-- A more complex navigation example: ----------------------------------------
 
