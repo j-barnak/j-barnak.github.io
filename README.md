@@ -7,7 +7,7 @@ guided by a simple philosophy: assume nothing.
 
 ## Branch Descriptions
 
-* live -- The live page
-* review -- 
-* rough draft --
-* main --
+* **live** — The live version of the website
+* **review** — Any rough drafts ready for review; must be merged via pull request
+* **rough-draft** — Rough drafts of articles
+* **main** — In-progress or unfinished articles
