@@ -11,3 +11,8 @@ guided by a simple philosophy: assume nothing.
 * **review** — Any rough drafts ready for review; must be merged via pull request
 * **rough-draft** — Rough drafts of articles
 * **main** — In-progress or unfinished articles
+
+## TODOs
+
+For a list of goals, what's in progress, what's planned, and what needs updating, visit
+[here](TODO.md)
