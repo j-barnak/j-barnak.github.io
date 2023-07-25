@@ -4,6 +4,7 @@
 
 * Finish site template
 * Create a working pipeline
+* Add DSA section
 
 ## Articles In Progress
 
