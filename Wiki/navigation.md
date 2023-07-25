@@ -1,3 +1,5 @@
 # Kanrab Wiki
 
-[gimmick:theme](cosmo)
+[gimmick:theme](readable)
+
+[List of Topics and Subtopics](pages/AllTopics.md)
