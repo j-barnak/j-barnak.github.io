@@ -15,4 +15,4 @@ guided by a simple philosophy: assume nothing.
 ## TODOs
 
 For a list of goals, what's in progress, what's planned, and what needs updating, visit
-[here](TODO.md)
+[here](TODO.md).
