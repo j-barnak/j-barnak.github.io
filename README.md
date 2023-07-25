@@ -1,6 +1,6 @@
 # Kanrab Wiki
 
-## Goal and Philosophy
+## Philosophy
 
 A wiki dedicated to the in-depth explanations of nerdy topics. This wiki is
 guided by a simple philosophy: assume nothing.
