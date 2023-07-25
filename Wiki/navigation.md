@@ -2,7 +2,7 @@
 
 
 <!-- Choose theme-->
-[gimmick:theme](journal)
+[gimmick:theme](cosmo)
 
 
 [Cryptography](pages/Test/Q.md)
