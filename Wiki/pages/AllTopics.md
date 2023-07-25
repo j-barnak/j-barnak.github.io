@@ -1,13 +1,7 @@
 # All Topics
 
-  ## Cryptography 
-  * ### [SubMenu Item 1](subitem1.md)
-    * #### [Subtopic](subsubitem.md)
-  * ### [SubMenu Item 2](subitem2.md)
-  - - - -
-  ## SubMenu Heading 2
-  * ### [SubMenu Item 1](subitem1.md)
-    * #### [Subtopic](subsubitem.md)
-  * ### [SubMenu Item 2](subitem2.md)
-  * ### [SubMenu Item 3](subitem3.md)
-  - - - -
+  * [Cryptography](sub.md)
+    * [SubMenu Item 1](subitem1.md)
+    * [Subtopic](subsubitem.md)
+    * [SubMenu Item 2](subitem2.md)
+  * [Computer Networking](sub.md)
