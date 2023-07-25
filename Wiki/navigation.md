@@ -2,5 +2,5 @@
 
 [gimmick:theme](readable)
 
-[About](pages/About.md)
-[List of All Topics](pages/AllTopics.md)
+[About](Topics/About.md)
+[List of All Topics](Topics/AllTopics.md)
