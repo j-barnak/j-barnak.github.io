@@ -7,6 +7,6 @@
 
 ## Articles In Progress
 
-## Articles That Need to be Made 
+## Planned Articles
 
 ## Articles That Need Updating
