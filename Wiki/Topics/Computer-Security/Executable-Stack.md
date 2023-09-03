@@ -86,8 +86,9 @@ We see that these arguments are passed into local variables
    0x00005555555551d3 <+16>:    mov    QWORD PTR [rbp-0x10],rsi
 ```
 
-The argument `string` is passed into `rax` and the subsequently passed into `rsi` denoting that this is the second argument. We then
-see the address [rip+0xe2b]   # 0x555555556010
+The argument `string` is passed into `rax` and the subsequently passed into `rsi` denoting that this is the second argument. Then we see that
+see the address `[rip+0xe2b]` (gdb graciously tells us this is `0x555555556010`) is passed into `rax` and then `rdi`. We have our two arguments
+for `printf` and then we call `printf` itself.
 
 ```
     0x00005555555551d7 <+20>:    mov    rax,QWORD PTR [rbp-0x8]
@@ -97,3 +98,14 @@ see the address [rip+0xe2b]   # 0x555555556010
     0x00005555555551e8 <+37>:    mov    eax,0x0
     0x00005555555551ed <+42>:    call   0x5555555550a0 <printf@plt>
 ```
+
+Undefined behavior is invoked because passing a function pointer when the format specifier expected a string. As such, anything can happen and in our case,
+nothing is printed to the screen.
+
+The undefined behavior is interesting, but far more so, is the second part of `print` where we invoke user supplied input as if it were a function. Before we
+explore that, it's necessary to understand how `call` works.
+
+There are actually two type of `call` instructions -- near and far. For the vast majority of modern processes, you will encounter the `near` call.
+In a `near call` *TODO: Explain Near Call*
+
+*TODO: Discuss the multiple type of calls -- near call and far call*
