@@ -3,7 +3,7 @@
 ## What is an Executable Stack
 
 An **executable stack**, as the name implies, allows for instructions to be executed on the stack. This simple
-program illustrates how this might works:
+program illustrates how this might work:
 
 ```c
 #include <stdio.h>
@@ -105,7 +105,21 @@ nothing is printed to the screen.
 The undefined behavior is interesting, but far more so, is the second part of `print` where we invoke user supplied input as if it were a function. Before we
 explore that, it's necessary to understand how `call` works.
 
-There are actually two type of `call` instructions -- near and far. For the vast majority of modern processes, you will encounter the `near` call.
-In a `near call` *TODO: Explain Near Call*
+There are actually two type of `call` instructions -- near and far. Near calls transfer control to procedures with the code segment (i.e., `.text segment`), and far
+calls transfer control to procedures in different segments. 
 
-*TODO: Discuss the multiple type of calls -- near call and far call*
+When executing a near call, the processor does the following:
+   
+1. Push the instruction pointer (`rip`) onto the stack
+2. Loads the address of the called procedure into the instruction pointer
+3. Continue execution
+
+While discussing `call`s, I think it is worthwhile to explain the mechanisms of the return instruction `ret`
+
+When executing a `ret` instruction:
+
+1. Pop the top of the stack into into `rip`
+2. If `ret` has an `N` operand, incremenent the stack by `N` bytes to release the pushed parameters from the stack
+3. Resume execution of the stack of the calling procedure
+
+
