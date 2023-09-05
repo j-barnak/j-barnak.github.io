@@ -1,4 +1,3 @@
 # Kanrab Wiki
 
-
-## [Computer Security](./Topics/Computer-Security/Executable-Stack.md)
+## [Computer Security](./Topics/Computer-Security/Computer-Security-Topics.md)
