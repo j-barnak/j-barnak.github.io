@@ -1,9 +1,6 @@
-# Exploting an Executable Stack
+# The Executable Stack
 
-## What is an Executable Stack
-
-An **executable stack**, as the name implies, allows for instructions to be executed on the stack. This simple
-program illustrates how this might work:
+An **executable stack**, as the name implies, allows for instructions to be executed on the stack. This simple program illustrates how this might work:
 
 ```c
 #include <stdio.h>
@@ -29,14 +26,12 @@ Compiling and running with  `Ya` as the input yields
 segmentation fault (core dumped)
 ```
 
-which is what you'd exect to happen. The program attempted to execute an illegal memory location, hence an error is raised. However, if you
-compile the same code with the `-z execstack` flag and keep the same input, you'll encounter a slightly different error.
+which is what you'd exect to happen. The program attempted to execute an illegal memory location, hence an error is raised. However, if you compile the same code with the `-z execstack` flag and keep the same input, you'll encounter a slightly different error.
 
 ```
 illegal hardware instruction (core dumped)
 ```
-Why the different error messages? Let's explore what happended in both versions of the same program. The program compiled without the `-z execstack`
-flag will hereon forth be referred to as `NonExecStackBinary` and the one without, `ExecStackBinary`.
+Why the different error messages? Let's explore what happended in both versions of the same program. The program compiled without the `-z execstack` flag will hereon forth be referred to as `NonExecStackBinary` and the one without, `ExecStackBinary`.
 
 Running `NonExecStackBinary` through gdb and dumping assembly of `print` shows
 
@@ -75,9 +70,7 @@ Dump of assembler code for function print:
 End of assembler dump.
 ```
 
-If you recall, according to the System V ABI, parameters to functions are passed in 
-the registers: rdi, rsi, rdx, rcx, r8, r9, and further values are passed on the stack in reverse order. Therefore, the registers
-`rdi` and `rsi` are the arguments `string` and `function_ptr` respectively. 
+If you recall, according to the System V ABI, parameters to functions are passed in  the registers: rdi, rsi, rdx, rcx, r8, r9, and further values are passed on the stack in reverse order. Therefore, the registers `rdi` and `rsi` are the arguments `string` and `function_ptr` respectively. 
 
 We see that these arguments are passed into local variables
 
@@ -86,9 +79,7 @@ We see that these arguments are passed into local variables
    0x00005555555551d3 <+16>:    mov    QWORD PTR [rbp-0x10],rsi
 ```
 
-The argument `string` is passed into `rax` and the subsequently passed into `rsi` denoting that this is the second argument. Then we see that
-see the address `[rip+0xe2b]` (gdb graciously tells us this is `0x555555556010`) is passed into `rax` and then `rdi`. We have our two arguments
-for `printf` and then we call `printf` itself.
+The argument `string` is passed into `rax` and the subsequently passed into `rsi` denoting that this is the second argument. Then we see that see the address `[rip+0xe2b]` (gdb graciously tells us this is `0x555555556010`) is passed into `rax` and then `rdi`. We have our two arguments for `printf` and then we call `printf` itself.
 
 ```
     0x00005555555551d7 <+20>:    mov    rax,QWORD PTR [rbp-0x8]
@@ -99,14 +90,11 @@ for `printf` and then we call `printf` itself.
     0x00005555555551ed <+42>:    call   0x5555555550a0 <printf@plt>
 ```
 
-Undefined behavior is invoked because passing a function pointer when the format specifier expected a string. As such, anything can happen and in our case,
-nothing is printed to the screen.
+Undefined behavior is invoked because passing a function pointer when the format specifier expected a string. As such, anything can happen and in our case, nothing is printed to the screen.
 
-The undefined behavior is interesting, but far more so, is the second part of `print` where we invoke user supplied input as if it were a function. Before we
-explore that, it's necessary to understand how `call` works.
+The undefined behavior is interesting, but far more so, is the second part of `print` where we invoke user supplied input as if it were a function. Before we explore that, it's necessary to understand how `call` works.
 
-There are actually two type of `call` instructions -- near and far. Near calls transfer control to procedures with the code segment (i.e., `.text segment`), and far
-calls transfer control to procedures in different segments. 
+There are actually two type of `call` instructions -- near and far. Near calls transfer control to procedures with the code segment (i.e., `.text segment`), and far calls transfer control to procedures in different segments. 
 
 When executing a near call, the processor does the following:
    
@@ -121,5 +109,4 @@ When executing a `ret` instruction:
 1. Pop the top of the stack into into `rip`
 2. If `ret` has an `N` operand, incremenent the stack by `N` bytes to release the pushed parameters from the stack
 3. Resume execution of the stack of the calling procedure
-
 
