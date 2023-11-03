@@ -28,7 +28,11 @@ Compiling the programm normally and supplying `Ya` as the input yields the follo
 segmentation fault (core dumped)
 ```
 
-which is what you'd exect to happen. The program attempted to execute an illegal memory location, hence an error is raised. However, if you compile the same code with the `-z execstack` flag and supply the same input, you'll encounter a slightly different error.
+<!-- 
+TODO: This sentence requires some work! I am not executing an illegal memory location, I am executing an instruction located on the stack, which is not executable.
+-->
+
+which is what you'd expect to happen. The program attempted to execute an illegal memory location, hence an error is raised. However, if you compile the same code with the `-z execstack` flag and supply the same input, you'll encounter a slightly different error.
 
 ```
 illegal hardware instruction (core dumped)
@@ -95,7 +99,9 @@ The argument `string` is passed into `rax` and the subsequently passed into `rsi
 
 Undefined behavior is invoked because passing a function pointer when the format specifier expected a string. As such, anything can happen and in our case, nothing is printed to the screen.
 
-The undefined behavior is interesting, but far more so, is the second part of `print` where we invoke user supplied input as if it were a function. Before we explore that, it's necessary to understand how `call` works.
+The undefined behavior is interesting, but far more so, is the second part of `print` where we invoke user supplied input as if it were a function.
+
+Before we explore that, it's necessary to understand how `call` works.
 
 There are actually two type of `call` instructions -- near and far. Near calls transfer control to procedures with the code segment (i.e., `.text segment`), and far calls transfer control to procedures in different segments. 
 
@@ -105,11 +111,16 @@ When executing a near call, the processor does the following:
 2. Loads the address of the called procedure into the instruction pointer
 3. Continue execution
 
-While discussing `call`s, I think it is worthwhile to explain the mechanisms of the return instruction `ret`
+In the same vein, there is the return instruction, `ret`.
 
-When executing a `ret` instruction:
+When executing a `ret` instruction, the processor does the following:
 
 1. Pop the top of the stack into into `rip`
 2. If `ret` has an `N` operand, incremenent the stack by `N` bytes to release the pushed parameters from the stack
 3. Resume execution of the stack of the calling procedure
+
+Back to our program at hand!
+
+There are two important elements regarding this program: (1) The user supplies input, and (2), the program executes the program because of the swapped arguments. Knowing this, we could have this program execute nigh anything! The possibilities are endless! 
+
 
