@@ -34,7 +34,7 @@ which is what you'd exect to happen. The program attempted to execute an illegal
 illegal hardware instruction (core dumped)
 ```
 
-Why the different error messages? Let's explore what happended in both versions of the same program. The program compiled without the `-z execstack` flag will hereon forth be referred to as `NonExecStackBinary` and the one without, `ExecStackBinary`.
+A different instruction!? Let's explore what happended in both versions of the same program. The program compiled without the `-z execstack` flag will hereon forth be referred to as `NonExecStackBinary` and the one without, `ExecStackBinary`.
 
 Running `NonExecStackBinary` through gdb and dumping assembly of `print` shows
 
@@ -73,16 +73,16 @@ Dump of assembler code for function print:
 End of assembler dump.
 ```
 
-If you recall, according to the System V ABI, parameters to functions are passed in  the registers: rdi, rsi, rdx, rcx, r8, r9, and further values are passed on the stack in reverse order. Therefore, the registers `rdi` and `rsi` are the arguments `string` and `function_ptr` respectively. 
+If you recall, according to the System V ABI, parameters to functions are passed in  the registers: `rdi`, `rsi`, `rdx`, `rcx`, `r8`, `r9`, and further values are passed on the stack in reverse order. As such, the registers `rdi` and `rsi` are the arguments `string` and `function_ptr` respectively. 
 
-We see that these arguments are passed into local variables
+We see that these arguments are loaded into local variables.
 
 ```
    0x00005555555551cf <+12>:    mov    QWORD PTR [rbp-0x8],rdi
    0x00005555555551d3 <+16>:    mov    QWORD PTR [rbp-0x10],rsi
 ```
 
-The argument `string` is passed into `rax` and the subsequently passed into `rsi` denoting that this is the second argument. Then we see that see the address `[rip+0xe2b]` (gdb graciously tells us this is `0x555555556010`) is passed into `rax` and then `rdi`. We have our two arguments for `printf` and then we call `printf` itself.
+The argument `string` is passed into `rax` and the subsequently passed into `rsi` denoting that this is the second argument. We also we see that see the address `[rip+0xe2b]` (gdb graciously tells us this is `0x555555556010`) is loaded into `rax` and then immaediate loaded into `rdi`. We now have our two arguments for `printf`. Finally, with our provided arguments, a call to `printf` is made.
 
 ```
     0x00005555555551d7 <+20>:    mov    rax,QWORD PTR [rbp-0x8]
