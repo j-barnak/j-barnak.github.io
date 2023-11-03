@@ -128,8 +128,8 @@ There are two important elements regarding this program: (1) The user supplies i
 
 First order of business: craft a payload.
 
-We'll be injecting shellcode, a small piece of code that is used as a pyaload, into our binary.
+We'll be injecting shellcode, a small piece of code that is used as a payload, into our binary.
 
-## Another aside: what *are* binaries? And why do we need to use assembly (and not C) for our shellcode?
+## Why Assembly?
 
-
+When exploiting binaries, you will almost always be injecting binary? Why not C or a higer level language? Because binaries are the
