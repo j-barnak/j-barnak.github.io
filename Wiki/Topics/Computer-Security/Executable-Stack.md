@@ -2,6 +2,8 @@
 
 **[WIP]**
 
+## A Simple Exploitable Program
+
 An **executable stack**, as the name implies, allows for instructions to be executed on the stack. This simple program illustrates how this might work:
 
 ```c
@@ -101,6 +103,7 @@ Undefined behavior is invoked because passing a function pointer when the format
 
 The undefined behavior is interesting, but far more so, is the second part of `print` where we invoke user supplied input as if it were a function.
 
+## Exploring Calls and Returns 
 Before we explore that, it's necessary to understand how `call` works.
 
 There are actually two type of `call` instructions -- near and far. Near calls transfer control to procedures with the code segment (i.e., `.text segment`), and far calls transfer control to procedures in different segments. 
@@ -121,6 +124,12 @@ When executing a `ret` instruction, the processor does the following:
 
 Back to our program at hand!
 
-There are two important elements regarding this program: (1) The user supplies input, and (2), the program executes the program because of the swapped arguments. Knowing this, we could have this program execute nigh anything! The possibilities are endless! 
+There are two important elements regarding this program: (1) The user supplies input, and (2), the program executes the program because of the swapped arguments. Knowing this, we could have this program execute nigh anything!
+
+First order of business: craft a payload.
+
+We'll be injecting shellcode, a small piece of code that is used as a pyaload, into our binary.
+
+## Another aside: what *are* binaries? And why do we need to use assembly (and not C) for our shellcode?
 
 
