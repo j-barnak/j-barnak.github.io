@@ -132,4 +132,5 @@ We'll be injecting shellcode, a small piece of code that is used as a payload, i
 
 ## Why Assembly?
 
-When exploiting binaries, you will almost always be injecting binary? Why not C or a higer level language? Because binaries are the
+When exploiting binaries, you will almost always be injecting binary? Why not C or a higer level language? To understand this, we must first understand what binaries and how they come to be. 
+
