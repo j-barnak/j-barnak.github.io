@@ -22,17 +22,18 @@ int main() {
 }
 ```
 
-Compiling and running with  `Ya` as the input yields
+Compiling the programm normally and supplying `Ya` as the input yields the following:
 
 ```
 segmentation fault (core dumped)
 ```
 
-which is what you'd exect to happen. The program attempted to execute an illegal memory location, hence an error is raised. However, if you compile the same code with the `-z execstack` flag and keep the same input, you'll encounter a slightly different error.
+which is what you'd exect to happen. The program attempted to execute an illegal memory location, hence an error is raised. However, if you compile the same code with the `-z execstack` flag and supply the same input, you'll encounter a slightly different error.
 
 ```
 illegal hardware instruction (core dumped)
 ```
+
 Why the different error messages? Let's explore what happended in both versions of the same program. The program compiled without the `-z execstack` flag will hereon forth be referred to as `NonExecStackBinary` and the one without, `ExecStackBinary`.
 
 Running `NonExecStackBinary` through gdb and dumping assembly of `print` shows
