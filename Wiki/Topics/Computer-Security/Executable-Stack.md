@@ -130,7 +130,7 @@ First order of business: craft a payload.
 
 We'll be injecting shellcode, a small piece of code that is used as a payload, into our binary.
 
-## Why Assembly?
+## Why Assembly (And a Bit About Binaries)?
 
 When exploiting binaries, you will almost always be injecting binary? Why not C or a higer level language? To understand this, we must first understand what binaries and how they come to be. 
 
